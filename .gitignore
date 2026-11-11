@@ -1,0 +1,40 @@
+
+# Dipendenze Node.js
+node_modules/
+
+# File temporanei di Wrangler
+.wrangler/
+
+# Variabili d'ambiente e credenziali
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+
+# Log
+*.log
+npm-debug.log*
+
+# File temporanei del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# File temporanei degli editor
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Output di build (se generati automaticamente)
+dist/
+build/
+
+# Archivi e backup locali
+*.zip
+*.bak
+*.old
+
+# File csv e temporanei di blocco LibreOffice
+.~lock.*#
+orario.csv

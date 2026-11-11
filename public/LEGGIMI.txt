@@ -1,0 +1,42 @@
+ORARIO LAB — COPIA STATICA
+
+Carica tutti i file di questa cartella su un web server statico, anche in una sottocartella.
+Apri index.html attraverso HTTP o HTTPS, non con un doppio clic sul file.
+Non servono Node.js, database, installazioni di dipendenze o compilazioni.
+Non sono presenti /admin, login, API o collegamenti a servizi remoti.
+
+AGGIORNAMENTO
+Sostituisci orario.csv con il CSV esportato da Google Fogli (UTF-8, separatore virgola).
+Mantieni 37 colonne: nome, Colore e 7 colonne per ognuno dei cinque giorni.
+Le ultime due righe sono Lab 1 e Lab 2.
+La settima colonna vuota per tutte le righe determina un giorno di sei ore.
+Modifica config.json con un editor di testo: csvFile, csvHasHeader, timeZone e days.
+starts contiene gli inizi; end la fine dell'ultima ora configurata.
+Se config contiene 7 inizi ma il CSV indica 6 ore, il sesto periodo termina all'inizio del settimo.
+Se il CSV passa a 7 ore, configura il settimo inizio e la nuova fine lezioni.
+Ricarica la pagina dopo aver sostituito i file. CSV e JSON sono richiesti senza cache del browser;
+un eventuale CDN o proxy deve essere configurato per non fornire copie obsolete.
+Il pulsante Adesso aggiorna la selezione del giorno, non rilegge i file.
+
+SERVER LOCALE
+Se Python è installato, da questa cartella esegui: python -m http.server 8000
+Poi apri http://localhost:8000
+In alternativa usa IIS, Apache, Nginx o qualsiasi hosting statico.
+
+Questa versione conserva la grafica e la consultazione dell'orario.
+Non include ancora manifest o service worker PWA.
+
+AGGIORNAMENTO SETTIMANE PARI/DISPARI
+Le ultime due righe devono essere Lab 1 (dispari) e Lab 2 (pari). Lab 3 non è ammesso.
+La settimana che contiene il primo gennaio è la 1, le successive iniziano lunedì.
+Il conteggio riparte il primo gennaio, usando il fuso orario di config.json.
+Per ogni ora sono mostrate entrambe le occupazioni; solo quella attuale è verde scuro.
+Vuoto = Libero; M = manutenzione / pulizia, indipendentemente per ogni riga.
+Una data in Lab 2 sospende l'alternanza fino a quel giorno incluso: vale Lab 1 per entrambe le settimane.
+La scadenza è confrontata con la data odierna, anche quando si consultano gli altri giorni della settimana generica.
+Dopo la scadenza sostituire la data in Lab 2 con una classe, M oppure una cella vuota.
+Finché la data scaduta resta nel CSV, compare un messaggio di aggiornamento.
+Una data in Lab 1 è un errore segnalato nel relativo riquadro.
+Il CSV incluso proviene dalla copia precedente, con la sola rimozione di Lab 3: sostituirlo con l'esportazione aggiornata se le prenotazioni sono cambiate.
+
+Per ogni ora il riquadro della parità corrente è in cima; quello dell’altra parità è sotto, bianco con testo grigio medio, comprese le etichette delle classi. Il riquadro unico durante una sospensione dell’alternanza resta invariato.
