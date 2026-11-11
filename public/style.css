@@ -89,7 +89,6 @@
 }
 
 /* Odd and even week occupancy. Only the active occupation is dark green. */
-#week-info{padding:12px 20px 4px;color:#526856;font-size:14px;font-weight:600}
 .week-occupancy{border:1px solid #b4c5b3;border-radius:9px;padding:10px 12px;background:#f4f8f0;min-width:0}
 .week-label{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:650;color:#526856;margin-bottom:8px}
 .week-content{display:grid;gap:7px}
@@ -100,7 +99,6 @@
 .deadline-note{color:#526856}
 @media(max-width:520px){.week-occupancy{padding:9px}.week-label{font-size:12px}}
 
-/* Place the other week in the background visually. */
-.week-occupancy.other-week{background:#fff;color:#737373;border-color:#d5d5d5}
-.other-week .week-label,.other-week .week-content,.other-week .cell-error{color:#737373}
-.other-week .badge{background:#fff!important;color:#737373!important;border-color:#d5d5d5!important}
+/* Next-week panel with a pale red background and original class colors. */
+.week-occupancy.other-week{background:#fcf0f0;color:#000;border-color:#e5cccc}
+.other-week .week-label,.other-week .week-content,.other-week .cell-error{color:#000}

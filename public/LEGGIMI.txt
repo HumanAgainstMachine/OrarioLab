@@ -39,4 +39,6 @@ Finché la data scaduta resta nel CSV, compare un messaggio di aggiornamento.
 Una data in Lab 1 è un errore segnalato nel relativo riquadro.
 Il CSV incluso proviene dalla copia precedente, con la sola rimozione di Lab 3: sostituirlo con l'esportazione aggiornata se le prenotazioni sono cambiate.
 
-Per ogni ora il riquadro della parità corrente è in cima; quello dell’altra parità è sotto, bianco con testo grigio medio, comprese le etichette delle classi. Il riquadro unico durante una sospensione dell’alternanza resta invariato.
+Per ogni ora il riquadro della parità corrente è in cima; quello dell’altra parità è sotto, rosso molto chiaro con testo nero; le etichette delle classi conservano i colori originali. Il riquadro unico durante una sospensione dell’alternanza resta invariato.
+
+Il primo riquadro di ogni ora è etichettato Settimana N, con N aggiornato automaticamente; il secondo è Prossima settimana. Anche il riquadro unico usa Settimana N.

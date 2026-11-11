@@ -52,11 +52,11 @@ function periodRow(hour,range,currentHour,calendar) {
   return `<div class="week-occupancy${isActive?' active-occupancy':''}${isOtherWeek?' other-week':''}"${isActive?' aria-current="time"':''}><div class="week-label">${label}${isActive?'<span>In corso</span>':''}</div><div class="week-content">${content}</div></div>`;
  }
  let content;
- if(blocked)content=box('Tutte le settimane',occupancy(odd,index,1),active)+`<small class="deadline-note">Nessuna alternanza fino al ${esc(deadline.label)} incluso.</small>`;
+ if(blocked)content=box(`Settimana ${calendar.week}`,occupancy(odd,index,1),active)+`<small class="deadline-note">Nessuna alternanza fino al ${esc(deadline.label)} incluso.</small>`;
  else {
   const evenContent=deadline?.valid?'<span class="cell-error">Data scaduta: aggiornare Lab 2.</span>':occupancy(even,index,2);
-  const oddBox=box('Settimane dispari',occupancy(odd,index,1),active&&calendar.parity==='odd',calendar.parity!=='odd');
-  const evenBox=box('Settimane pari',evenContent,active&&calendar.parity==='even',calendar.parity!=='even');
+  const oddBox=box(calendar.parity==='odd'?`Settimana ${calendar.week}`:'Prossima settimana',occupancy(odd,index,1),active&&calendar.parity==='odd',calendar.parity!=='odd');
+  const evenBox=box(calendar.parity==='even'?`Settimana ${calendar.week}`:'Prossima settimana',evenContent,active&&calendar.parity==='even',calendar.parity!=='even');
   content=calendar.parity==='odd'?oddBox+evenBox:evenBox+oddBox;
  }
  return `<article class="period-row"><div class="period-time"><strong>${hour+1}ª ora</strong><span>${esc(range.replace('-','–'))}</span></div><div class="period-result">${content}</div></article>`;
@@ -66,7 +66,6 @@ function render(){
  const now = current();
  const calendar=calendarState();
  lastActive = `${calendar.key}:${now.d}:${now.h}`;
- $('#week-info').textContent=`Settimana ${calendar.week} · ${calendar.parity==='odd'?'dispari':'pari'}`;
  $('#days').innerHTML = days.map((name,i)=>`<button data-day="${i}" class="${day===i?'active':''}" aria-pressed="${day===i}">${name.slice(0,3)}</button>`).join('');
  $('#day-title').textContent = days[day] || 'Laboratorio';
  $('#day-status').textContent = '';
