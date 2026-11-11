@@ -94,11 +94,11 @@
 .week-content{display:grid;gap:7px}
 .active-occupancy{background:#173f35;color:#f1f8e8;border-color:#173f35}
 .active-occupancy .week-label{color:#e2edd9}
-.cell-error{display:block;color:#963c2f;font-size:15px;line-height:1.4}
-.active-occupancy .cell-error{color:#ffe2b9}
-.deadline-note{color:#526856}
 @media(max-width:520px){.week-occupancy{padding:9px}.week-label{font-size:12px}}
 
 /* Next-week panel with a pale red background and original class colors. */
 .week-occupancy.other-week{background:#fcf0f0;color:#000;border-color:#e5cccc}
-.other-week .week-label,.other-week .week-content,.other-week .cell-error{color:#000}
+.other-week .week-label,.other-week .week-content{color:#000}
+
+.period-note{margin-top:10px;padding-top:9px;border-top:1px solid #cddcc8;font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;color:inherit}
+.active-occupancy .period-note{border-color:#668a7e}

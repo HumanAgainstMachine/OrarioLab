@@ -20,17 +20,7 @@ function calendarState(now=new Date()) {
  const week=1+Math.floor(((date-jan)/86400000+offset)/7);
  return {key:`${parts.year}-${parts.month}-${parts.day}`,week,parity:week%2?'odd':'even'};
 }
-function dateCell(value) {
- const p=/^(\d{1,2})\/(\d{1,2})\/(\d{4}|\d{2})\/?$/.exec(value);
- if(!p)return null;
- const year=p[3].length===2?2000+Number(p[3]):Number(p[3]);
- const date=new Date(Date.UTC(year,+p[2]-1,+p[1]));
- const valid=date.getUTCFullYear()===year && date.getUTCMonth()===+p[2]-1 && date.getUTCDate()===+p[1];
- return {valid,key:valid?date.toISOString().slice(0,10):'',label:value.replace(/\/$/,'')};
-}
 function occupancy(value,index,row) {
- const date=dateCell(value);
- if(date || value.includes('/'))return `<span class="cell-error" role="alert">Errore Lab ${row}: ${row===1?'le date non sono ammesse.':'data non valida.'} (${esc(value)})</span>`;
  if(!value)return '<span class="period-status">Libero</span>';
  if(value.toUpperCase()==='M')return '<span class="period-status">manutenzione / pulizia</span>';
  return requestRow(value,index);
@@ -45,16 +35,16 @@ function requestRow(className, index) {
 function periodRow(hour,range,currentHour,calendar) {
  const index=schedule.dayOffsets[day]+hour;
  const odd=(schedule.labs[0][index]||'').trim(),even=(schedule.labs[1][index]||'').trim();
- const deadline=dateCell(even);
- const blocked=deadline?.valid && calendar.key<=deadline.key;
+ const blocked=even.toLowerCase()==='x';
+ const note=(schedule.notes?.[index]||'').trim();
  const active=currentHour===hour;
  function box(label,content,isActive,isOtherWeek=false) {
-  return `<div class="week-occupancy${isActive?' active-occupancy':''}${isOtherWeek?' other-week':''}"${isActive?' aria-current="time"':''}><div class="week-label">${label}${isActive?'<span>In corso</span>':''}</div><div class="week-content">${content}</div></div>`;
+  return `<div class="week-occupancy${isActive?' active-occupancy':''}${isOtherWeek?' other-week':''}"${isActive?' aria-current="time"':''}><div class="week-label">${label}${isActive?'<span>In corso</span>':''}</div><div class="week-content">${content}</div>${!isOtherWeek&&note?`<div class="period-note">${esc(note)}</div>`:''}</div>`;
  }
  let content;
- if(blocked)content=box(`Settimana ${calendar.week}`,occupancy(odd,index,1),active)+`<small class="deadline-note">Nessuna alternanza fino al ${esc(deadline.label)} incluso.</small>`;
+ if(blocked)content=box('Alternanza non prevista',occupancy(odd,index,1),active);
  else {
-  const evenContent=deadline?.valid?'<span class="cell-error">Data scaduta: aggiornare Lab 2.</span>':occupancy(even,index,2);
+  const evenContent=occupancy(even,index,2);
   const oddBox=box(calendar.parity==='odd'?`Settimana ${calendar.week}`:'Prossima settimana',occupancy(odd,index,1),active&&calendar.parity==='odd',calendar.parity!=='odd');
   const evenBox=box(calendar.parity==='even'?`Settimana ${calendar.week}`:'Prossima settimana',evenContent,active&&calendar.parity==='even',calendar.parity!=='even');
   content=calendar.parity==='odd'?oddBox+evenBox:evenBox+oddBox;

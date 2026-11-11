@@ -8,7 +8,7 @@ Non sono presenti /admin, login, API o collegamenti a servizi remoti.
 AGGIORNAMENTO
 Sostituisci orario.csv con il CSV esportato da Google Fogli (UTF-8, separatore virgola).
 Mantieni 37 colonne: nome, Colore e 7 colonne per ognuno dei cinque giorni.
-Le ultime due righe sono Lab 1 e Lab 2.
+Le righe finali sono Settimana dispari, Settimana pari e Note.
 La settima colonna vuota per tutte le righe determina un giorno di sei ore.
 Modifica config.json con un editor di testo: csvFile, csvHasHeader, timeZone e days.
 starts contiene gli inizi; end la fine dell'ultima ora configurata.
@@ -26,19 +26,18 @@ In alternativa usa IIS, Apache, Nginx o qualsiasi hosting statico.
 Questa versione conserva la grafica e la consultazione dell'orario.
 Non include ancora manifest o service worker PWA.
 
-AGGIORNAMENTO SETTIMANE PARI/DISPARI
-Le ultime due righe devono essere Lab 1 (dispari) e Lab 2 (pari). Lab 3 non è ammesso.
+SETTIMANE PARI/DISPARI E NOTE
+Le righe finali sono Settimana dispari, Settimana pari e Note. Note può essere omessa se non serve.
+Mantieni 37 colonne anche per Note: nome, Colore vuoto, 35 celle per le ore.
 La settimana che contiene il primo gennaio è la 1, le successive iniziano lunedì.
 Il conteggio riparte il primo gennaio, usando il fuso orario di config.json.
-Per ogni ora sono mostrate entrambe le occupazioni; solo quella attuale è verde scuro.
+Per ogni ora la settimana corrente è in cima, con etichetta Settimana N.
+L'altra occupazione è sotto, con etichetta Prossima settimana, sfondo rosso chiaro e testo nero.
+Le etichette delle classi mantengono i colori dei docenti.
+Solo l'occupazione in corso è verde scuro.
 Vuoto = Libero; M = manutenzione / pulizia, indipendentemente per ogni riga.
-Una data in Lab 2 sospende l'alternanza fino a quel giorno incluso: vale Lab 1 per entrambe le settimane.
-La scadenza è confrontata con la data odierna, anche quando si consultano gli altri giorni della settimana generica.
-Dopo la scadenza sostituire la data in Lab 2 con una classe, M oppure una cella vuota.
-Finché la data scaduta resta nel CSV, compare un messaggio di aggiornamento.
-Una data in Lab 1 è un errore segnalato nel relativo riquadro.
-Il CSV incluso proviene dalla copia precedente, con la sola rimozione di Lab 3: sostituirlo con l'esportazione aggiornata se le prenotazioni sono cambiate.
-
-Per ogni ora il riquadro della parità corrente è in cima; quello dell’altra parità è sotto, rosso molto chiaro con testo nero; le etichette delle classi conservano i colori originali. Il riquadro unico durante una sospensione dell’alternanza resta invariato.
-
-Il primo riquadro di ogni ora è etichettato Settimana N, con N aggiornato automaticamente; il secondo è Prossima settimana. Anche il riquadro unico usa Settimana N.
+Una x (anche X) in Settimana pari disattiva l'alternanza: si mostra solo Settimana dispari per entrambe le settimane, con etichetta Alternanza non prevista.
+Non esiste più alcuna gestione speciale delle date nelle righe Lab.
+Il testo di Note viene mostrato in basso nel riquadro verde della settimana corrente, una volta per ora, anche quando c'è x.
+Le note non aggiungono ore: il numero di ore dipende dalle righe docenti e Lab.
+Il CSV incluso è la copia precedente con una riga Note vuota aggiunta e le due vecchie date in Settimana pari sostituite con x: sostituiscilo con la tua esportazione aggiornata.
