@@ -71,7 +71,7 @@
 .sticky-top .week-navigation{padding-block:12px;margin-bottom:0;border-bottom:1px solid #cbd7c8}
 .timetable-page main{padding-top:0}
 
-.timetable-page .sticky-top{display:grid;grid-auto-rows:1fr}
+.timetable-page .sticky-top{display:grid;grid-template-rows:repeat(2,1fr) auto}
 .timetable-page .sticky-top header{height:auto}
 .timetable-page #now.now-clock{font-size:16px;font-weight:600;padding:7px 14px}
 
@@ -96,9 +96,30 @@
 .active-occupancy .week-label{color:#e2edd9}
 @media(max-width:520px){.week-occupancy{padding:9px}.week-label{font-size:12px}}
 
-/* Next-week panel with a pale red background and original class colors. */
-.week-occupancy.other-week{background:#fcf0f0;color:#000;border-color:#e5cccc}
+/* Next-week panel with a pale green background and original class colors. */
+.week-occupancy.other-week{background:#f4f8f0;color:#000;border-color:#b4c5b3}
 .other-week .week-label,.other-week .week-content{color:#000}
 
 .period-note{margin-top:10px;padding-top:9px;border-top:1px solid #cddcc8;font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;color:inherit}
 .active-occupancy .period-note{border-color:#668a7e}
+
+.sticky-top #day-title{margin:0;padding:12px 22px;font-size:16px;font-weight:600;line-height:1.4;letter-spacing:normal;color:#203d35;background:#fff;border-bottom:1px solid #e1e5dd}
+@media(max-width:520px){.sticky-top #day-title{padding:10px 13px;font-size:15px}}
+
+/* Header account menu. */
+.header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.account-menu{position:relative}
+.account-menu summary{display:flex;align-items:center;justify-content:center;width:38px;height:38px;list-style:none;cursor:pointer;border:1px solid #dbe5cf;border-radius:10px;background:#edf2e6;color:#26483a}
+.account-menu summary::-webkit-details-marker{display:none}
+.account-menu nav{position:absolute;right:0;top:calc(100% + 8px);min-width:140px;padding:5px;background:#fff;border:1px solid #cbd7c8;border-radius:10px;box-shadow:0 6px 20px #173f3520;z-index:10}
+.account-menu a{display:block;padding:11px 14px;border-radius:6px;text-decoration:none;color:#203d35;font-size:16px}
+.account-menu a:hover{background:#edf2e6}
+@media(max-width:360px){.timetable-page header{gap:8px;padding-inline:10px}.timetable-page .brand{font-size:21px}.header-actions{gap:5px}.timetable-page #now.now-clock{padding-inline:10px}}
+
+/* Parity initials on the right, vertically centered. */
+.occupancy-row{min-width:0}
+.week-parity{display:flex;justify-content:center;align-self:center;margin:0;color:#526856;font-size:11px;font-weight:650;line-height:1}
+.occupancy-body{min-width:0}
+.active-occupancy .week-parity{color:#e2edd9}
+
+.occupancy-row .week-occupancy{display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:8px;align-items:center}

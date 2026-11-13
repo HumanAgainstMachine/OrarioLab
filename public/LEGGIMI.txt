@@ -31,13 +31,17 @@ Le righe finali sono Settimana dispari, Settimana pari e Note. Note può essere 
 Mantieni 37 colonne anche per Note: nome, Colore vuoto, 35 celle per le ore.
 La settimana che contiene il primo gennaio è la 1, le successive iniziano lunedì.
 Il conteggio riparte il primo gennaio, usando il fuso orario di config.json.
-Per ogni ora la settimana corrente è in cima, con etichetta Settimana N.
-L'altra occupazione è sotto, con etichetta Prossima settimana, sfondo rosso chiaro e testo nero.
+Settimana D/mon - D/mon · pari/dispari mostra le date del lunedì e venerdì correnti e resta fissa sotto i giorni durante lo scroll. Per ogni ora la settimana corrente è in cima.
+Ogni occupazione ha etichetta P (pari) o D (dispari), a destra e centrate verticalmente dentro il box occupazione, senza separatore verticale. Senza alternanza compare P/D. L'altra occupazione è sotto, con sfondo verde chiaro e testo nero. I colori delle classi restano invariati.
 Le etichette delle classi mantengono i colori dei docenti.
 Solo l'occupazione in corso è verde scuro.
 Vuoto = Libero; M = manutenzione / pulizia, indipendentemente per ogni riga.
-Una x (anche X) in Settimana pari disattiva l'alternanza: si mostra solo Settimana dispari per entrambe le settimane, con etichetta Alternanza non prevista.
+Una x (anche X) in Settimana pari disattiva l'alternanza: si mostra solo Settimana dispari per entrambe le settimane, con etichetta Pari e dispari · Alternanza non prevista.
 Non esiste più alcuna gestione speciale delle date nelle righe Lab.
 Il testo di Note viene mostrato in basso nel riquadro verde della settimana corrente, una volta per ora, anche quando c'è x.
 Le note non aggiungono ore: il numero di ore dipende dalle righe docenti e Lab.
 Il CSV incluso è la copia precedente con una riga Note vuota aggiunta e le due vecchie date in Settimana pari sostituite con x: sostituiscilo con la tua esportazione aggiornata.
+
+MENU ACCOUNT
+Il menu in alto a destra contiene Logout, collegato a /cdn-cgi/access/logout sul dominio del sito.
+Il collegamento richiede Cloudflare Access configurato sull'host: su un server locale non effettua alcun logout.

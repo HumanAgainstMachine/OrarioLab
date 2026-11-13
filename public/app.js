@@ -18,7 +18,11 @@ function calendarState(now=new Date()) {
  const jan=Date.UTC(y,0,1), date=Date.UTC(y,m-1,d);
  const offset=(new Date(jan).getUTCDay()+6)%7;
  const week=1+Math.floor(((date-jan)/86400000+offset)/7);
- return {key:`${parts.year}-${parts.month}-${parts.day}`,week,parity:week%2?'odd':'even'};
+ const monday=date-((new Date(date).getUTCDay()+6)%7)*86400000;
+ const months=['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+ const shortDate=value=>{const day=new Date(value);return day.getUTCDate()+'/'+months[day.getUTCMonth()]};
+ const range=shortDate(monday)+' - '+shortDate(monday+4*86400000);
+ return {range,key:`${parts.year}-${parts.month}-${parts.day}`,week,parity:week%2?'odd':'even'};
 }
 function occupancy(value,index,row) {
  if(!value)return '<span class="period-status">Libero</span>';
@@ -38,15 +42,17 @@ function periodRow(hour,range,currentHour,calendar) {
  const blocked=even.toLowerCase()==='x';
  const note=(schedule.notes?.[index]||'').trim();
  const active=currentHour===hour;
- function box(label,content,isActive,isOtherWeek=false) {
-  return `<div class="week-occupancy${isActive?' active-occupancy':''}${isOtherWeek?' other-week':''}"${isActive?' aria-current="time"':''}><div class="week-label">${label}${isActive?'<span>In corso</span>':''}</div><div class="week-content">${content}</div>${!isOtherWeek&&note?`<div class="period-note">${esc(note)}</div>`:''}</div>`;
+ function box(label,content,isActive,isOtherWeek=false,noAlternation=false) {
+  const parityText=noAlternation?'<span>P/D</span>':`<span>${label==='Pari'?'P':'D'}</span>`;
+  return `<div class="occupancy-row"><div class="week-occupancy${isActive?' active-occupancy':''}${isOtherWeek?' other-week':''}"${isActive?' aria-current="time"':''}><div class="occupancy-body">${noAlternation||isActive?'<div class="week-label">'+(noAlternation?'Alternanza non prevista':'')+(isActive?'<span>In corso</span>':'')+'</div>':''}<div class="week-content">${content}</div>${!isOtherWeek&&note?`<div class="period-note">${esc(note)}</div>`:''}</div><div class="week-parity" aria-label="${label}"><div aria-hidden="true">${parityText}</div></div></div></div>`;
  }
+
  let content;
- if(blocked)content=box('Alternanza non prevista',occupancy(odd,index,1),active);
+ if(blocked)content=box('Pari e dispari',occupancy(odd,index,1),active,false,true);
  else {
   const evenContent=occupancy(even,index,2);
-  const oddBox=box(calendar.parity==='odd'?`Settimana ${calendar.week}`:'Prossima settimana',occupancy(odd,index,1),active&&calendar.parity==='odd',calendar.parity!=='odd');
-  const evenBox=box(calendar.parity==='even'?`Settimana ${calendar.week}`:'Prossima settimana',evenContent,active&&calendar.parity==='even',calendar.parity!=='even');
+  const oddBox=box('Dispari',occupancy(odd,index,1),active&&calendar.parity==='odd',calendar.parity!=='odd');
+  const evenBox=box('Pari',evenContent,active&&calendar.parity==='even',calendar.parity!=='even');
   content=calendar.parity==='odd'?oddBox+evenBox:evenBox+oddBox;
  }
  return `<article class="period-row"><div class="period-time"><strong>${hour+1}ª ora</strong><span>${esc(range.replace('-','–'))}</span></div><div class="period-result">${content}</div></article>`;
@@ -57,7 +63,7 @@ function render(){
  const calendar=calendarState();
  lastActive = `${calendar.key}:${now.d}:${now.h}`;
  $('#days').innerHTML = days.map((name,i)=>`<button data-day="${i}" class="${day===i?'active':''}" aria-pressed="${day===i}">${name.slice(0,3)}</button>`).join('');
- $('#day-title').textContent = days[day] || 'Laboratorio';
+ $('#day-title').textContent = `Settimana ${calendar.range} · ${calendar.parity==='even'?'pari':'dispari'}`;
  $('#day-status').textContent = '';
  if (!schedule) {
   $('#periods').textContent = loadError || 'Caricamento orario…';
@@ -135,3 +141,14 @@ function tick(){
 goNow();refresh();
 setInterval(tick,15000);
 document.addEventListener('visibilitychange',()=>{if (!document.hidden) tick()});
+
+const accountMenu = document.querySelector('.account-menu');
+document.addEventListener('click', event => {
+ if (accountMenu.open && !accountMenu.contains(event.target)) accountMenu.open = false;
+});
+document.addEventListener('keydown', event => {
+ if (event.key === 'Escape' && accountMenu.open) {
+  accountMenu.open = false;
+  accountMenu.querySelector('summary').focus();
+ }
+});
