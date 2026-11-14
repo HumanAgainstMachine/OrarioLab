@@ -1,9 +1,21 @@
-<!doctype html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#153e35"><meta name="description" content="Le richieste del laboratorio scolastico, giorno per giorno."><title>Orario Lab · Chi c’è in lab?</title><link rel="icon" type="image/png" href="./orario-lab-verde.png"><link rel="stylesheet" href="./style.css?v=weekly-21"></head><body class="timetable-page">
-<div class="sticky-top"><header><a class="brand" href="./"><img class="logo" src="./orario-lab-verde.png" alt="" width="200" height="182"> Orario<span>Lab</span></a><div class="header-actions"><button id="now" class="now-clock" type="button" title="Torna al giorno e all’ora attuali">Adesso</button><details class="account-menu"><summary aria-label="Menu account" title="Menu account"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary><nav aria-label="Account"><a href="/cdn-cgi/access/logout">Logout</a></nav></details></div></header>
+<!doctype html><html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#153e35"><meta name="description" content="Le richieste del laboratorio scolastico, giorno per giorno."><title>Orario Lab · Chi c’è in lab?</title><link rel="icon" type="image/png" href="./orario-lab-verde.png"><link rel="stylesheet" href="./style.css?v=pwa-2"><link rel="manifest" href="./manifest.webmanifest" crossorigin="use-credentials"><link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png?v=2"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="OrarioLab"><meta name="apple-mobile-web-app-status-bar-style" content="default"></head><body class="timetable-page">
+<div class="sticky-top"><header><a class="brand" href="./"><img class="logo" src="./orario-lab-verde.png" alt="" width="200" height="182"> Orario<span>Lab</span></a><div class="header-actions"><button id="now" class="now-clock" type="button" title="Torna al giorno e all’ora attuali">Adesso</button><details class="account-menu"><summary aria-label="Menu account" title="Menu account"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary><nav aria-label="Account"><button id="install-app" type="button">Installa OrarioLab</button><button id="share-app" type="button">Condividi</button><a href="/cdn-cgi/access/logout">Logout</a></nav></details></div></header>
 <div class="week-navigation"><nav id="days" aria-label="Giorno della settimana"></nav></div><h1 id="day-title"></h1></div>
 <main><section class="schedule daily" tabindex="0" aria-labelledby="day-title">
 <div id="day-status"></div>
 <div id="periods">Caricamento orario…</div>
 </section>
 <footer><span>Laboratorio di lingue ITCG Matera</span><span>&lt;- Swipeable -&gt;</span></footer></main>
-<script src="./timetable.js?v=weekly-21"></script><script src="./app.js?v=weekly-21"></script></body></html>
+<dialog id="install-dialog" class="app-dialog" aria-labelledby="install-title">
+<div class="dialog-heading"><h2 id="install-title">Installa OrarioLab</h2><button type="button" data-close aria-label="Chiudi">×</button></div>
+<p>Se il browser non propone l’installazione, usa il suo menu:</p>
+<ul><li><strong>Android:</strong> in Chrome, scegli “Installa app” o “Aggiungi a schermata Home”.</li><li><strong>iPhone:</strong> in Safari, tocca Condividi → Aggiungi alla schermata Home.</li><li><strong>PC:</strong> in Edge o Chrome, usa l’icona di installazione nella barra degli indirizzi o il menu del browser.</li></ul>
+<p>Se OrarioLab è già installata, aprila dalla sua icona.</p></dialog>
+<dialog id="share-dialog" class="app-dialog" aria-labelledby="share-title">
+<div class="dialog-heading"><h2 id="share-title">Condividi OrarioLab</h2><button type="button" data-close aria-label="Chiudi">×</button></div>
+<p>Scansiona il QR code per aprire OrarioLab.</p>
+<img class="share-qr" src="./QR-OrarioLab.png" alt="QR code del sito OrarioLab" width="260" height="260">
+<label for="share-link">Link del sito</label><input id="share-link" readonly value="https://orariolab.tarquilio.workers.dev/">
+<div class="dialog-actions"><button id="copy-link" type="button">Copia link</button><button id="native-share" type="button" hidden>Condividi…</button></div>
+<p id="share-status" role="status" aria-live="polite"></p><p class="dialog-note">L’accesso resta riservato agli account autorizzati.</p></dialog>
+<script src="./pwa.js?v=pwa-2"></script><script src="./timetable.js?v=pwa-2"></script><script src="./app.js?v=pwa-2"></script></body></html>

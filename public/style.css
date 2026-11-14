@@ -123,3 +123,22 @@
 .active-occupancy .week-parity{color:#e2edd9}
 
 .occupancy-row .week-occupancy{display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:8px;align-items:center}
+
+.account-menu nav{min-width:205px}
+.account-menu nav button{display:block;width:100%;padding:11px 14px;border-radius:6px;text-align:left;color:#203d35;font-size:16px}
+.account-menu nav button:hover{background:#edf2e6}
+[hidden]{display:none!important}
+.app-dialog{width:min(420px,calc(100% - 28px));max-height:calc(100dvh - 40px);overflow:auto;padding:22px;border:1px solid #cbd7c8;border-radius:14px;background:#fff;color:#203d35;box-shadow:0 10px 40px #173f3530}
+.app-dialog::backdrop{background:#132e2566}
+.dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dialog-heading h2{margin:0;font-size:21px}
+.dialog-heading button{font-size:28px;min-width:36px;min-height:36px}
+.app-dialog p,.app-dialog li{font-size:15px;line-height:1.5}
+.app-dialog ul{padding-left:20px}.app-dialog li+li{margin-top:10px}
+.share-qr{display:block;width:min(260px,100%);height:auto;margin:8px auto 18px}
+.app-dialog label{display:block;font-size:13px;margin-bottom:5px}
+#share-link{width:100%;padding:10px;border:1px solid #b4c5b3;border-radius:7px;font-size:13px;color:#203d35;background:#f4f8f0}
+.dialog-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.dialog-actions button{padding:10px 14px;border-radius:8px;background:#173f35;color:#fff}
+.app-dialog .dialog-note{font-size:12px;color:#526856}
+#share-status:empty{display:none}

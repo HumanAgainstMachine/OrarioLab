@@ -3,7 +3,7 @@ ORARIO LAB — COPIA STATICA
 Carica tutti i file di questa cartella su un web server statico, anche in una sottocartella.
 Apri index.html attraverso HTTP o HTTPS, non con un doppio clic sul file.
 Non servono Node.js, database, installazioni di dipendenze o compilazioni.
-Non sono presenti /admin, login, API o collegamenti a servizi remoti.
+Non sono presenti /admin, backend o database. Il login pubblicato è gestito esternamente da Cloudflare Access.
 
 AGGIORNAMENTO
 Sostituisci orario.csv con il CSV esportato da Google Fogli (UTF-8, separatore virgola).
@@ -24,7 +24,7 @@ Poi apri http://localhost:8000
 In alternativa usa IIS, Apache, Nginx o qualsiasi hosting statico.
 
 Questa versione conserva la grafica e la consultazione dell'orario.
-Non include ancora manifest o service worker PWA.
+Include manifest e icone PWA. Richiede Internet; non registra service worker né crea cache offline. Consulta INSTALLAZIONE.txt.
 
 SETTIMANE PARI/DISPARI E NOTE
 Le righe finali sono Settimana dispari, Settimana pari e Note. Note può essere omessa se non serve.

@@ -1,0 +1,43 @@
+ORARIOLAB — INSTALLAZIONE E DISTRIBUZIONE
+
+https://orariolab.tarquilio.workers.dev/
+Condividi il link o QR-OrarioLab.png con gli utenti autorizzati. Il QR contiene solo l’indirizzo e non concede accesso.
+
+PUBBLICAZIONE
+Copia i file di orario-lab nella cartella degli asset del tuo progetto, includendo manifest.webmanifest e icons/.
+Mantieni i tuoi orario.csv e config.json aggiornati: lo ZIP contiene la copia disponibile in questa chat. Conserva la configurazione Wrangler del tuo progetto.
+Esegui il consueto deploy. Non occorre cambiare le policy Cloudflare Access.
+Accedi al sito e ricaricalo; verifica installazione, avvio dall’icona, login Google e Logout su un telefono e un PC.
+Il manifest usa use-credentials per essere richiesto con la sessione Access. Non rendere pubblici CSV o config per installare l’app.
+
+ANDROID — CHROME
+Apri il link direttamente in Chrome, accedi e scegli dal menu Installa app oppure Aggiungi a schermata Home. Conferma.
+Le diciture e il tipo di installazione dipendono dal dispositivo e dal browser.
+
+IPHONE — SAFARI
+Apri il link in Safari e accedi. Tocca Condividi > Aggiungi alla schermata Home.
+Se disponibile, lascia attiva l’opzione di apertura come app web e conferma Aggiungi.
+Apri la nuova icona; potrebbe essere necessario accedere nuovamente.
+
+PC — EDGE O CHROME
+Apri il sito e accedi. Usa l’icona di installazione nella barra degli indirizzi o il comando Installa nel menu del browser. Conferma.
+Apri OrarioLab dal menu Start o dal collegamento creato.
+
+USO
+Serve Internet. Non è prevista consultazione offline.
+Le scadenze di sessione restano gestite da Cloudflare Access.
+Logout richiama /cdn-cgi/access/logout; non disconnette globalmente l’account Google.
+Gli aggiornamenti del sito non richiedono reinstallazione: ricarica la pagina per leggere i nuovi file.
+Adesso seleziona giorno e ora correnti, ma non rilegge il CSV. Un’app già aperta mantiene i dati fino alla ricarica.
+
+NOTE TECNICHE
+Il sito resta statico senza compilazione, service worker o cache offline applicativa.
+Manifest e icone hanno percorsi relativi, compatibili anche con sottocartelle.
+Per installare serve HTTPS o localhost per i test; HTTP su un indirizzo LAN non è sufficiente.
+Servire manifest.webmanifest come application/manifest+json o JSON compatibile, non HTML.
+La verifica locale dei file non sostituisce la prova di installazione e autenticazione sul dominio protetto.
+In Edge/Chrome il manifest è controllabile negli strumenti sviluppatore, Application > Manifest.
+
+MENU NELL’APP
+Installa OrarioLab apre la richiesta nativa quando il browser la rende disponibile; altrimenti mostra le istruzioni per Android, iPhone e PC. La voce è nascosta quando l’app è aperta in modalità standalone.
+Condividi mostra il QR code e il link da copiare. Il pulsante Condividi… usa il pannello del dispositivo quando supportato. Il QR e il link non concedono autorizzazioni di accesso.
